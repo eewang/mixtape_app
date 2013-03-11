@@ -1,0 +1,36 @@
+<script>
+
+$(document).ready(function(){
+  $('#addgenre').click(function() {
+    console.log("Hello")
+    $('#genreselection').append(
+       <select id="genreselection" name="song[genre_id][]">
+      <% @genres.each do |g| %>
+      <option value=<%= g.id %>><%= g.name %></option>
+      <% end %>
+    </select>
+      );
+  });
+})
+
+</script>
+
+<%= form_for(@song) do |f| %>
+    <!-- include ability for users to associate genres with songs -->
+    <%= f.label(:name) %>
+    <%= f.text_field(:name) %>
+
+    <%= f.label(:genre) %>
+    <select id="genreselection" name="song[genre_id][]">
+      <% @genres.each do |g| %>
+      <option value=<%= g.id %>><%= g.name %></option>
+      <% end %>
+    </select>
+
+    <%#= f.select :id, Genre.all.collect{ |g| [g.name, g.id]} %>
+
+  <div class="actions">
+    <button id="addgenre" type="button">Add Genre</button><br />
+    <%= f.submit %>
+  </div>
+<% end %>rai
